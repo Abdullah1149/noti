@@ -1,48 +1,59 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التنبيهات</title>
+    <title>تنبيهات رمضان ✨🌙</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .announcement-container {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            color: white;
             text-align: center;
-            position: relative;
+            padding: 20px;
             overflow: hidden;
         }
         .announcement {
-            font-size: 18px;
-            font-weight: bold;
-            color: #d9534f;
-            padding: 15px;
-            background: #fff3cd;
-            border-radius: 8px;
-            border: 1px solid #ffeeba;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(255, 223, 186, 0.5);
             animation: fadeIn 1.5s ease-in-out;
+        }
+        .announcement h1 {
+            color: #FFD700;
+            font-size: 24px;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .lantern {
+            width: 100px;
+            position: absolute;
+            animation: swing 3s infinite ease-in-out alternate;
+        }
+        @keyframes swing {
+            0% { transform: rotate(-10deg); }
+            100% { transform: rotate(10deg); }
+        }
+        .lantern-container {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
 </head>
 <body>
-    <div class="announcement-container">
-        <div class="announcement">👋 السلام عليكم ورحمة الله وبركاته، أهلاً بك يا عزيز، وحشتيني والله!</div>
+    <div class="lantern-container">
+        <img src="https://i.imgur.com/vd6mHqR.png" class="lantern" alt="فانوس رمضان">
+    </div>
+    <div class="announcement">
+        <h1>✨🌙 السلام عليكم ورحمة الله وبركاته 🌙✨</h1>
+        <p>أهلاً بك يا عزيز، رمضان كريم عليك! 🕌💫</p>
     </div>
 </body>
 </html>
