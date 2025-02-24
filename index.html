@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📢 تنبيهات مهمة</title>
+    <title>📢 تنبيهات كرييتيف أوي!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(to right, #0F2027, #203A43, #2C5364);
+            background: #121212;
             color: white;
             text-align: center;
             padding: 20px;
@@ -19,7 +19,7 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 380px;
+            width: 420px;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -27,72 +27,78 @@
         }
 
         .notification {
-            background: rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, #1e1e1e, #292929);
             padding: 18px;
             border-radius: 12px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            transform: translateX(100%);
-            animation: fadeIn 0.6s ease-in-out forwards;
-            backdrop-filter: blur(10px);
-            border-left: 5px solid #FFD700;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            animation: fadeIn 0.5s ease-out, floaty 4s infinite alternate ease-in-out;
+        }
+
+        .notification:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #292929, #3a3a3a);
+        }
+
+        .notification:active {
+            transform: scale(0.98);
+            box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
         }
 
         .notification p {
             margin: 0;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
             text-align: right;
-            color: #fff;
+            color: #ffffff;
+            flex: 1;
+            transition: color 0.3s ease;
+        }
+
+        .notification:hover p {
+            color: #FFDD57;
         }
 
         .close-btn {
-            background: #ff4d4d;
+            background: #ff4757;
             color: white;
             border: none;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         .close-btn:hover {
-            background: #d11a1a;
+            background: #c0392b;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateX(100%);
-            }
+        @keyframes floaty {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(5px); }
         }
     </style>
 </head>
 <body>
 
     <div class="notifications-container" id="notifications">
-        <!-- سيتم إضافة التنبيهات هنا عبر الجافاسكريبت -->
+        <!-- التنبيهات تضاف هنا -->
     </div>
 
     <script>
@@ -109,23 +115,22 @@
             closeButton.innerHTML = "×";
             closeButton.classList.add("close-btn");
             closeButton.onclick = function() {
-                notification.style.animation = "fadeOut 0.5s ease-in-out forwards";
-                setTimeout(() => notification.remove(), 500);
+                notification.remove();
             };
 
             notification.appendChild(message);
             notification.appendChild(closeButton);
             container.appendChild(notification);
-
-            setTimeout(() => {
-                notification.style.animation = "fadeOut 0.5s ease-in-out forwards";
-                setTimeout(() => notification.remove(), 500);
-            }, 7000); // يختفي بعد 7 ثوانٍ
         }
 
         // إضافة التنبيهات المطلوبة
-        addNotification("📢 <strong>بشمهنسة منيرة منير</strong> لغت سكاشن يوم الأربعاء <strong>الكترونكس</strong> وقالت احضر في أي سكشن ليها في أي يوم غيره أو مع معيد تاني وبلغه بالغياب.");
-        addNotification("⚠️ <strong>أي غياب في سكشن التفاضل والتكامل</strong> = <span style='color: #FFDD57;'>سالب واحد</span> في درجات أعمال السنة الخاصة بالمادة. الدكتور اللي قال كده في المحاضرة.");
+        addNotification(
+            "📢 <strong>بشمهنسة منيرة منير</strong> لغت سكاشن يوم الأربعاء <strong>الكترونكس</strong> وقالت احضر في أي سكشن ليها في أي يوم غيره أو مع معيد تاني وبلغه بالغياب."
+        );
+
+        addNotification(
+            "⚠️ <strong>أي غياب في سكشن التفاضل والتكامل</strong> = <span style='color: #FFDD57;'>سالب واحد</span> في درجات أعمال السنة الخاصة بالمادة."
+        );
     </script>
 
 </body>
