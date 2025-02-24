@@ -15,7 +15,7 @@
             padding: 20px;
         }
 
-        /* ✅ الهيد لاين (الترحيب) */
+        /* ✅ الهيد لاين */
         .headline {
             background: #333;
             padding: 20px;
@@ -46,6 +46,7 @@
             z-index: 1000;
         }
 
+        /* ✅ التنبيه العادي */
         .notification {
             background: linear-gradient(135deg, rgba(30, 30, 30, 0.9), rgba(41, 41, 41, 0.9));
             padding: 18px;
@@ -54,22 +55,33 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            animation: fadeIn 0.5s ease-out, floaty 4s infinite alternate ease-in-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .notification:hover {
             transform: scale(1.05);
             box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.3);
-            background: linear-gradient(135deg, rgba(41, 41, 41, 0.9), rgba(58, 58, 58, 0.9));
         }
 
-        .notification:active {
-            transform: scale(0.98);
-            box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
+        /* ✅ التنبيه المهم (تحذيرات أو قرارات) */
+        .important-notification {
+            background: linear-gradient(135deg, #C0392B, #E74C3C);
+            border: 2px solid #FF5733;
+        }
+
+        .important-notification:hover {
+            box-shadow: 0px 10px 25px rgba(255, 87, 51, 0.7);
+        }
+
+        /* ✅ تنبيه مميز للإضافة الجديدة */
+        .special-notification {
+            background: linear-gradient(135deg, #2A9D8F, #3CCF91);
+            border: 2px solid #FFD700;
+        }
+
+        .special-notification:hover {
+            box-shadow: 0px 10px 25px rgba(255, 215, 0, 0.6);
         }
 
         .notification p {
@@ -77,13 +89,8 @@
             font-size: 17px;
             font-weight: 600;
             text-align: right;
-            color: #ffffff;
+            color: white;
             flex: 1;
-            transition: color 0.3s ease;
-        }
-
-        .notification:hover p {
-            color: #FFDD57;
         }
 
         .close-btn {
@@ -97,28 +104,10 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         .close-btn:hover {
             background: #c0392b;
-        }
-
-        /* ✅ تنبيه مميز لإضافة جديدة */
-        .special-notification {
-            background: linear-gradient(135deg, #2A9D8F, #3CCF91);
-            border: 2px solid #FFD700;
-            color: white;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes floaty {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(5px); }
         }
     </style>
 </head>
@@ -130,19 +119,18 @@
         <span>💛 صلِّ على النبي ﷺ وابتسم، يومك هيكون أجمل! 😁</span>
     </div>
 
-    <!-- ✅ التنبيهات -->
-    <div class="notifications-container" id="notifications">
-        <!-- التنبيهات تضاف هنا -->
-    </div>
+    <!-- ✅ صندوق التنبيهات -->
+    <div class="notifications-container" id="notifications"></div>
 
     <script>
-        function addNotification(text, isSpecial = false) {
+        function addNotification(text, type = "normal") {
             const container = document.getElementById("notifications");
-
             const notification = document.createElement("div");
             notification.classList.add("notification");
 
-            if (isSpecial) {
+            if (type === "important") {
+                notification.classList.add("important-notification");
+            } else if (type === "special") {
                 notification.classList.add("special-notification");
             }
 
@@ -161,19 +149,21 @@
             container.appendChild(notification);
         }
 
-        // ✅ إضافة التنبيهات العادية
+        // ✅ تنبيه عادي
         addNotification(
             "📢 <strong>بشمهنسة منيرة منير</strong> لغت سكاشن يوم الأربعاء <strong>الكترونكس</strong> وقالت احضر في أي سكشن ليها في أي يوم غيره أو مع معيد تاني وبلغه بالغياب."
         );
 
+        // ✅ تنبيه مهم (تحذير)
         addNotification(
-            "⚠️ <strong>أي غياب في سكشن التفاضل والتكامل</strong> = <span style='color: #FFDD57;'>سالب واحد</span> في درجات أعمال السنة الخاصة بالمادة."
+            "⚠️ <strong>أي غياب في سكشن التفاضل والتكامل</strong> = <span style='color: #FFDD57;'>سالب واحد</span> في درجات أعمال السنة الخاصة بالمادة.",
+            "important"
         );
 
-        // ✅ إضافة تنبيه مميز لإضافة جديدة
+        // ✅ تنبيه مميز لإضافة جديدة
         addNotification(
-    "🆕 <strong>تم إضافة تحديثات جديدة!</strong><br> 📌 <strong>التجربة الأولى للإلكترونكس</strong> 📡<br> 📌 <strong>شابتر 2 في السلوك التنظيمي</strong> 📖<br> 📌 <strong>سكاشن المواد اللي لسه معمولة</strong> 🏫",
-            true
+            "🆕 <strong>تم إضافة تحديثات جديدة!</strong><br> 📌 <strong>التجربة الأولى للإلكترونكس</strong> 📡<br> 📌 <strong>شابتر 2 في السلوك التنظيمي</strong> 📖<br> 📌 <strong>سكاشن المواد اللي لسه معمولة</strong> 🏫",
+            "special"
         );
     </script>
 
