@@ -3,57 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تنبيهات رمضان ✨🌙</title>
+    <title>📢 تنبيهات مهمة</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            background: linear-gradient(to right, #0F2027, #203A43, #2C5364);
             color: white;
             text-align: center;
             padding: 20px;
-            overflow: hidden;
         }
-        .announcement {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            display: inline-block;
-            box-shadow: 0 0 15px rgba(255, 223, 186, 0.5);
-            animation: fadeIn 1.5s ease-in-out;
+
+        .notifications-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
         }
-        .announcement h1 {
-            color: #FFD700;
-            font-size: 24px;
+
+        .notification {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 18px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transform: translateX(100%);
+            animation: fadeIn 0.6s ease-in-out forwards;
+            backdrop-filter: blur(10px);
+            border-left: 5px solid #FFD700;
         }
+
+        .notification p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: right;
+            color: #fff;
+        }
+
+        .close-btn {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #d11a1a;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-        .lantern {
-            width: 100px;
-            position: absolute;
-            animation: swing 3s infinite ease-in-out alternate;
-        }
-        @keyframes swing {
-            0% { transform: rotate(-10deg); }
-            100% { transform: rotate(10deg); }
-        }
-        .lantern-container {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="lantern-container">
-        <img src="https://img.freepik.com/free-vector/ramadan-lantern-star-hanging-3d-decorations-realistick-islamic-object-collection-isolated-arabic-shining-lamp_145391-1304.jpg?t=st=1740171885~exp=1740175485~hmac=a12889dc75ad1458a388f4330f95bbdb6029b2627739bce23889fa3aa2b5ccba&w=996" class="lantern" alt="فانوس رمضان">
+
+    <div class="notifications-container" id="notifications">
+        <!-- سيتم إضافة التنبيهات هنا عبر الجافاسكريبت -->
     </div>
-    <div class="announcement">
-        <h1>✨🌙 السلام عليكم ورحمة الله وبركاته 🌙✨</h1>
-        <p>أهلاً بك يا عزيز، رمضان كريم عليك! 🕌💫</p>
-    </div>
+
+    <script>
+        function addNotification(text) {
+            const container = document.getElementById("notifications");
+
+            const notification = document.createElement("div");
+            notification.classList.add("notification");
+
+            const message = document.createElement("p");
+            message.innerHTML = text;
+
+            const closeButton = document.createElement("button");
+            closeButton.innerHTML = "×";
+            closeButton.classList.add("close-btn");
+            closeButton.onclick = function() {
+                notification.style.animation = "fadeOut 0.5s ease-in-out forwards";
+                setTimeout(() => notification.remove(), 500);
+            };
+
+            notification.appendChild(message);
+            notification.appendChild(closeButton);
+            container.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = "fadeOut 0.5s ease-in-out forwards";
+                setTimeout(() => notification.remove(), 500);
+            }, 7000); // يختفي بعد 7 ثوانٍ
+        }
+
+        // إضافة التنبيهات المطلوبة
+        addNotification("📢 <strong>بشمهنسة منيرة منير</strong> لغت سكاشن يوم الأربعاء <strong>الكترونكس</strong> وقالت احضر في أي سكشن ليها في أي يوم غيره أو مع معيد تاني وبلغه بالغياب.");
+        addNotification("⚠️ <strong>أي غياب في سكشن التفاضل والتكامل</strong> = <span style='color: #FFDD57;'>سالب واحد</span> في درجات أعمال السنة الخاصة بالمادة. الدكتور اللي قال كده في المحاضرة.");
+    </script>
+
 </body>
 </html>
