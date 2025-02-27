@@ -1,171 +1,184 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📢 تنبيهات كرييتيف أوي!</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📢 تنبيهات !</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: transparent;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: transparent;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      direction: rtl;
+    }
 
-        /* ✅ الهيد لاين */
-        .headline {
-            background: #333;
-            padding: 20px;
-            border-radius: 12px;
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            color: #FFD700;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-        }
+    .headline {
+      background: #333;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      color: #FFD700;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+    
+    .headline span {
+      color: white;
+      font-size: 18px;
+      display: block;
+      margin-top: 5px;
+    }
 
-        .headline span {
-            color: white;
-            font-size: 18px;
-            display: block;
-            margin-top: 5px;
-        }
+    .notifications-container {
+      width: 400px;
+      position: absolute;
+      top: 180px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+      direction: rtl;
+      text-align: right;
+    }
 
-        /* ✅ صندوق التنبيهات */
-        .notifications-container {
-            width: 400px;
-            position: absolute;
-            top: 180px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
-        }
+    .notification {
+      background: linear-gradient(135deg, #445566, #556677);
+      padding: 18px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: shakeIn 0.5s ease-in-out;
+      position: relative;
+    }
 
-        /* ✅ التنبيه العادي بلون مختلف */
-        .notification {
-            background: linear-gradient(135deg, #445566, #556677);
-            padding: 18px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .notification:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.3);
+      animation: glitch 0.3s ease-in-out;
+    }
 
-        .notification:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.3);
-        }
+    @keyframes shakeIn {
+      0% { transform: translateX(30px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
 
-        /* ✅ التنبيه المهم (تحذيرات أو قرارات) */
-        .important-notification {
-            background: linear-gradient(135deg, #C0392B, #E74C3C);
-            border: 2px solid #FF5733;
-        }
+    @keyframes glitch {
+      0% { transform: translateX(2px) skewX(10deg); }
+      50% { transform: translateX(-2px) skewX(-10deg); }
+      100% { transform: translateX(0); }
+    }
 
-        .important-notification:hover {
-            box-shadow: 0px 10px 25px rgba(255, 87, 51, 0.7);
-        }
+    .important-notification {
+      background: linear-gradient(135deg, #C0392B, #E74C3C);
+      border: 2px solid #FF5733;
+      animation: flicker 1s infinite alternate;
+    }
 
-        /* ✅ تنبيه مميز للإضافة الجديدة */
-        .special-notification {
-            background: linear-gradient(135deg, #2A9D8F, #3CCF91);
-            border: 2px solid #FFD700;
-        }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
 
-        .special-notification:hover {
-            box-shadow: 0px 10px 25px rgba(255, 215, 0, 0.6);
-        }
+    .special-notification {
+      background: linear-gradient(135deg, #2A9D8F, #3CCF91);
+      border: 2px solid #FFD700;
+    }
 
-        .notification p {
-            margin: 0;
-            font-size: 17px;
-            font-weight: 600;
-            text-align: right;
-            color: white;
-            flex: 1;
-        }
+    .notification p {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: right;
+      color: white;
+      flex: 1;
+      direction: rtl;
+    }
 
-        .close-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .close-btn {
+      background: #ff4757;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 10px;
+      align-self: flex-start;
+    }
 
-        .close-btn:hover {
-            background: #c0392b;
-        }
-    </style>
+    .close-btn:hover {
+      background: #c0392b;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ✅ الهيد لاين الترحيبي -->
-    <div class="headline">
-        👋 أهلاً وسهلاً يا عزيزي!
-        <span>💛 صلِّ على النبي ﷺ وابتسم، يومك هيكون أجمل! 😁</span>
-    </div>
+  <div class="headline">
+    👋 أهلاً وسهلاً يا عزيزي!
+    <span>💛 صلِّ على النبي ﷺ وابتسم، يومك هيكون أجمل! 😁</span>
+  </div>
 
-    <!-- ✅ صندوق التنبيهات -->
-    <div class="notifications-container" id="notifications"></div>
+  <div class="notifications-container" id="notifications"></div>
 
-    <script>
-        function addNotification(text, type = "normal") {
-            const container = document.getElementById("notifications");
-            const notification = document.createElement("div");
-            notification.classList.add("notification");
+  <script>
+    function addNotification(htmlContent, type = "normal") {
+      const container = document.getElementById("notifications");
+      const notification = document.createElement("div");
+      notification.classList.add("notification");
 
-            if (type === "important") {
-                notification.classList.add("important-notification");
-            } else if (type === "special") {
-                notification.classList.add("special-notification");
-            }
+      if (type === "important") {
+        notification.classList.add("important-notification");
+      } else if (type === "special") {
+        notification.classList.add("special-notification");
+      }
 
-            const message = document.createElement("p");
-            message.innerHTML = text;
+      const closeButton = document.createElement("button");
+      closeButton.innerHTML = "×";
+      closeButton.classList.add("close-btn");
+      closeButton.onclick = function() {
+        notification.remove();
+      };
+      notification.appendChild(closeButton);
 
-            const closeButton = document.createElement("button");
-            closeButton.innerHTML = "×";
-            closeButton.classList.add("close-btn");
-            closeButton.onclick = function() {
-                notification.remove();
-            };
+      const content = document.createElement("div");
+      content.innerHTML = htmlContent;
+      notification.appendChild(content);
 
-            notification.appendChild(message);
-            notification.appendChild(closeButton);
-            container.appendChild(notification);
-        }
+      container.appendChild(notification);
+    }
 
-        // ✅ تنبيه عادي بلونه المختلف
-        addNotification(
-            "📢 <strong>بشمهنسة منيرة منير</strong> لغت سكاشن يوم الأربعاء <strong>الكترونكس</strong> وقالت احضر في أي سكشن ليها في أي يوم غيره أو مع معيد تاني وبلغه بالغياب."
-        );
+    const updatesContent = `
+      <strong>📌 الحاجات اللي اتضافت:</strong>
+      <ul>
+        <li>✅ فيديوهات الـ Functions للكالك ! 🧮</li>
+        <li>✅ محاضرة Probabilities 3 ! 🎲</li>
+        <li>✅ محاضرة Technical Writing 2 ! ✍️</li>
+      </ul>
+    `;
 
-        // ✅ تنبيه مهم (تحذير)
-        addNotification(
-            "⚠️ <strong>أي غياب في سكشن التفاضل والتكامل</strong> = <span style='color: #FFDD57;'>سالب واحد</span> في درجات أعمال السنة الخاصة بالمادة.",
-            "important"
-        );
+    const importantContent = `
+      <strong>⚠️ تنبيه مهم:</strong>
+      <p>👨‍🏫 م/ فادي ماهر هيكون موجود الاثنين، والأربع، والخميس الأسبوع ده والجاي 
+        علشان اللي لسه مسلمش الإرشاد الأكاديمي من سكاشن 31 لحد 34 يخلصه بسرعة! ⏳📑
+      </p>
+    `;
 
-        // ✅ تنبيه مميز لإضافة جديدة
-        addNotification(
-            "🆕 <strong>تم إضافة تحديثات جديدة!</strong><br> 📌 <strong>التجربة الأولى للإلكترونكس</strong> 📡<br> 📌 <strong>شابتر 2 في السلوك التنظيمي</strong> 📖<br> 📌 <strong>سكاشن المواد اللي لسه معمولة</strong> 🏫",
-            "special"
-        );
-    </script>
-
+    addNotification(updatesContent, "special");
+    addNotification(importantContent, "important");
+  </script>
 </body>
 </html>
